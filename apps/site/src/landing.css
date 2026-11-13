@@ -1,0 +1,523 @@
+/* Landing page ("/"): flat monochrome system. Only the brand name and emblem carry over from the old theme.
+   Imported by styles.css, so Tailwind utilities (bg-lp-*, ease-lp) are generated from the @theme block below. */
+
+@theme inline {
+  --color-lp-bg: var(--lp-bg);
+  --color-lp-surface: var(--lp-surface);
+  --color-lp-raised: var(--lp-raised);
+  --color-lp-hover: var(--lp-hover);
+  --color-lp-line: var(--lp-line);
+  --color-lp-warm: var(--lp-warm);
+  --color-lp-fg: var(--lp-fg);
+  --color-lp-gold: var(--lp-gold);
+  --color-lp-muted: var(--lp-muted);
+  --ease-lp: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Symmetric weighted curve, used only for the intro doors so they visibly travel before settling. */
+  --ease-lp-doors: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Tokens live on the root while the landing is mounted, so portals (cookie dialog) and the chat widget follow them.
+   The extra html selector makes these win over the old :root and :root.light blocks regardless of source order. */
+html:root:has(.lp) {
+  color-scheme: dark;
+  --lp-bg: #000000;
+  --lp-surface: #181818;
+  --lp-raised: #1f1f1f;
+  --lp-hover: #272727;
+  --lp-line: #313131;
+  --lp-warm: #131209;
+  --lp-fg: #ffffff;
+  --lp-muted: #9b9b9b;
+  --lp-gold: #ffffff; /* the glowing accent: rings, the assistant button; white in the dark theme */
+  --lp-title-from: #ffffff;
+  --lp-title-to: #9b9b9b;
+
+  --background: var(--lp-bg);
+  --foreground: var(--lp-fg);
+  --card: var(--lp-surface);
+  --card-foreground: var(--lp-fg);
+  --popover: var(--lp-surface);
+  --popover-foreground: var(--lp-fg);
+  --primary: var(--lp-fg);
+  --primary-foreground: var(--lp-bg);
+  --secondary: var(--lp-raised);
+  --secondary-foreground: var(--lp-fg);
+  --muted: var(--lp-raised);
+  --muted-foreground: var(--lp-muted);
+  --accent: var(--lp-hover);
+  --accent-foreground: var(--lp-fg);
+  --border: var(--lp-line);
+  --input: var(--lp-line);
+  --ring: var(--lp-fg);
+  --gold: var(--lp-gold);
+  --gold-soft: var(--lp-muted);
+  --status-live: var(--lp-fg);
+  --status-dev: var(--lp-muted);
+  --status-custom: var(--lp-fg);
+  --gradient-gold: var(--lp-fg);
+  --shadow-gold: none;
+}
+html:root.light:has(.lp) {
+  color-scheme: light;
+  --lp-bg: #ffffff;
+  --lp-surface: #f5f5f5;
+  --lp-raised: #ededed;
+  --lp-hover: #e4e4e4;
+  --lp-line: #d4d4d4;
+  --lp-warm: #f5f5f5;
+  /* Black and white. All type is black (muted type a very dark grey, 10:1). Bright gold is only for what glows:
+     the rings around cards, the assistant button and the drawing behind the first screen. */
+  --lp-fg: #000000;
+  --lp-muted: #404040;
+  --lp-gold: #dba812;
+  --gold-soft: #f2d36b;
+  --lp-title-from: #000000;
+  --lp-title-to: #333333;
+}
+
+/* One typeface: the old serif display font (also used inside the cookie dialog portal) falls back to Manrope. */
+html:has(.lp) .font-display {
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.lp {
+  --radius: 0.5rem; /* restores Tailwind's default rounded-sm to rounded-xl steps inside the landing */
+  background: var(--lp-bg);
+  color: var(--lp-fg);
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  .lp h1,
+  .lp h2,
+  .lp h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .lp p,
+  .lp li,
+  .lp summary {
+    text-wrap: pretty;
+  }
+  .lp * {
+    border-color: var(--lp-line);
+  }
+}
+
+/* Narrow phones: long German words ("Datenschutzerklärung") must not push the page wider than the screen. Unlayered on
+   purpose, so it beats the size utilities of the older pages. */
+.lp h1,
+.lp h2,
+.lp h3 { overflow-wrap: break-word; }
+@media (max-width: 419px) {
+  .lp h1 { font-size: 1.875rem; line-height: 2.25rem; }
+}
+
+/* Hero subline: full white (black on the light theme), a touch heavier, with a soft shadow so it stays clear over the
+   bright strands of the photograph. */
+.lp-hero-sub {
+  color: var(--lp-fg);
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.55);
+}
+:root.light .lp-hero-sub { text-shadow: none; }
+
+/* Hero heading: the one gradient on the text itself (colours come from the --lp-title tokens). */
+.lp-hero-title {
+  background-image: linear-gradient(to right, var(--lp-title-from), var(--lp-title-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero photograph: full bleed behind the text and fading into the page at the bottom edge. It stays still on purpose:
+   a moving picture under blurred panels would be re-blurred on every frame. */
+.lp-hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent);
+}
+/* Light theme: the black photograph is inverted and multiplied onto the warm page, so the strands read as gold on cream. */
+:root.light .lp-hero-img {
+  filter: invert(1) hue-rotate(180deg) saturate(2.2) brightness(1.05);
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+.lp-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 40%;
+}
+
+/* Hero entrance runs from CSS so server rendered content is never hidden. */
+@keyframes lp-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+.lp-enter {
+  animation: lp-rise 700ms var(--ease-lp) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Scroll reveals: hidden only after hydration (data-motion), shown once by IntersectionObserver. */
+.lp[data-motion="on"] [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms var(--ease-lp), transform 700ms var(--ease-lp);
+  transition-delay: var(--d, 0ms);
+}
+.lp[data-motion="on"] [data-reveal][data-in="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Tagline: words start muted and switch on one by one in reading order. */
+.lp[data-motion="on"] .lp-word {
+  opacity: 0.3;
+  transition: opacity 500ms var(--ease-lp);
+}
+.lp[data-motion="on"] .lp-word[data-on="true"] {
+  opacity: 1;
+}
+
+/* Mobile menu panel: full height, links rise 24px and fade in, 60ms apart, capped at 400ms. */
+.lp-menu {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-lp), visibility 0s linear 500ms;
+}
+.lp-menu[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+.lp-menu-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 500ms var(--ease-lp), transform 500ms var(--ease-lp);
+}
+.lp-menu[data-open="true"] .lp-menu-item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(min(var(--i, 0) * 60, 400) * 1ms);
+}
+
+/* Menu toggle: two lines that rotate into a cross. */
+.lp-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  margin: -1px 0 0 -8px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 500ms var(--ease-lp);
+}
+.lp-bar-a { transform: translateY(-4px); }
+.lp-bar-b { transform: translateY(4px); }
+[aria-expanded="true"] > .lp-bar-a { transform: rotate(45deg); }
+[aria-expanded="true"] > .lp-bar-b { transform: rotate(-45deg); }
+
+.lp-plus { transition: transform 500ms var(--ease-lp); }
+.lp details[open] .lp-plus { transform: rotate(45deg); }
+.lp summary { list-style: none; }
+.lp summary::-webkit-details-marker { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp [data-reveal],
+  .lp-menu-item,
+  .lp-enter {
+    transform: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Intro. Two sequences on one CSS timeline (keep INTRO_MS in intro.tsx in step with these delays):
+   sequence 1  0.1s to 1.5s  slogan builds word by word, then the logo appears
+   sequence 2  1.3s to 2.6s  pictures appear on both sides, then the screen opens like double doors
+   Always dark, whatever the page theme. Without JavaScript it still ends by itself at 2.65s.
+   Shown on the first visit only: returning browsers get html[data-intro-seen] before first paint.
+   --------------------------------------------------------------------------------------------- */
+.lp-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  animation: lp-intro-gone 1ms linear 2650ms forwards;
+}
+@keyframes lp-intro-gone {
+  to { visibility: hidden; pointer-events: none; }
+}
+
+.lp-intro-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(50% + 1px); /* the extra pixel hides the seam on odd viewport widths */
+  overflow: hidden;
+  background: #000000;
+  will-change: transform;
+}
+.lp-intro-left { left: 0; animation: lp-door-left 850ms var(--ease-lp-doors) 1750ms both; }
+.lp-intro-right { right: 0; animation: lp-door-right 850ms var(--ease-lp-doors) 1750ms both; }
+@keyframes lp-door-left { to { transform: translateX(-100%); } }
+@keyframes lp-door-right { to { transform: translateX(100%); } }
+
+/* Both panels carry the same full width picture, aligned to the viewport, so the halves meet in the middle. */
+.lp-intro-img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100vw;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0;
+}
+.lp-intro-img-left { left: 0; animation: lp-side-left 500ms var(--ease-lp) 1300ms forwards; }
+.lp-intro-img-right { right: 0; animation: lp-side-right 500ms var(--ease-lp) 1300ms forwards; }
+@keyframes lp-side-left {
+  from { opacity: 0; transform: translateX(-48px); }
+  to { opacity: 0.6; transform: none; }
+}
+@keyframes lp-side-right {
+  from { opacity: 0; transform: translateX(48px); }
+  to { opacity: 0.6; transform: none; }
+}
+
+.lp-intro-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: lp-fade-out 350ms var(--ease-lp) 1550ms forwards;
+}
+@keyframes lp-fade-out { to { opacity: 0; visibility: hidden; } }
+.lp-intro-skip { animation: lp-fade-out 350ms var(--ease-lp) 1550ms forwards; }
+
+.lp-intro-word {
+  display: inline-block;
+  opacity: 0;
+  animation: lp-rise 400ms var(--ease-lp) calc(100ms + var(--i, 0) * var(--step, 100ms)) forwards;
+}
+/* The slogan and the name are gold on the black intro: a bright gold that deepens towards the bottom of the letters,
+   like the metal of the emblem. Gold is set per word, because each word is animated on its own. */
+.lp-intro-gold {
+  background-image: linear-gradient(180deg, #f6dc85 0%, #dba812 55%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lp-intro-logo {
+  opacity: 0;
+  animation: lp-pop 450ms var(--ease-lp) 900ms forwards;
+}
+@keyframes lp-pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: none; }
+}
+
+/* The page behind starts its own entrance as the doors begin to open. */
+.lp[data-intro="on"] .lp-enter {
+  animation-delay: calc(var(--d, 0ms) + 1750ms);
+}
+html[data-intro-seen] .lp-intro { display: none; }
+html[data-intro-seen] .lp[data-intro="on"] .lp-enter { animation-delay: var(--d, 0ms); }
+@media (prefers-reduced-motion: reduce) {
+  .lp-intro { display: none; }
+  .lp[data-intro="on"] .lp-enter { animation-delay: var(--d, 0ms); }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Process steps: a dot per step, joined by one dashed line drawn in process-steps.tsx.
+   --------------------------------------------------------------------------------------------- */
+.lp-dot {
+  border-color: var(--lp-line);
+  background: var(--lp-bg);
+  transition: transform 500ms var(--ease-lp), background-color 300ms var(--ease-lp), border-color 300ms var(--ease-lp);
+}
+.lp-dot[data-active="true"] {
+  border-color: var(--lp-fg);
+  background: var(--lp-fg);
+}
+.lp[data-motion="on"] .lp-step {
+  opacity: 0.4;
+  transition: opacity 500ms var(--ease-lp), background-color 500ms var(--ease-lp);
+}
+.lp[data-motion="on"] .lp-step[data-active="true"] {
+  opacity: 1;
+  background: var(--lp-raised);
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Carousel (carousel.tsx): cards in one row inside a frame, snapping to the middle. The card in the middle
+   is scaled up and lit, its neighbours shrink and dim, so it reads as lifted off the row.
+   Scale and opacity only; the shadow sits on a pseudo element whose opacity fades in.
+   --------------------------------------------------------------------------------------------- */
+.lp-carousel {
+  --card-w: min(22rem, 78vw);
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Side padding lets the first and last card reach the middle; block padding leaves room for the raised card and its shadow. */
+  padding: 3rem calc(50% - var(--card-w) / 2);
+  scrollbar-width: none;
+  /* Neighbours that run off the frame dissolve instead of being cut mid word. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+.lp-carousel::-webkit-scrollbar { display: none; }
+.lp-carousel > li {
+  position: relative;
+  flex: 0 0 var(--card-w);
+  scroll-snap-align: center;
+}
+.lp-carousel > li::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 1rem;
+  box-shadow: 0 32px 48px -16px rgb(0 0 0 / 0.75), 0 0 36px -10px color-mix(in oklab, var(--lp-gold) 45%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms var(--ease-lp);
+}
+:root.light .lp-carousel > li::after { box-shadow: 0 32px 48px -16px rgb(0 0 0 / 0.25), 0 0 36px -8px color-mix(in oklab, var(--lp-gold) 55%, transparent); }
+
+.lp[data-motion="on"] .lp-carousel > li {
+  transform: scale(0.86);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: transform 500ms var(--ease-lp), opacity 500ms var(--ease-lp);
+}
+.lp[data-motion="on"] .lp-carousel > li[data-active="true"] {
+  transform: scale(1.08);
+  opacity: 1;
+  cursor: auto;
+  z-index: 1;
+}
+.lp[data-motion="on"] .lp-carousel > li[data-active="true"]::after { opacity: 1; }
+.lp-carousel > li[data-active="true"] .lp-card { background: var(--lp-raised); }
+/* Only the raised card keeps turning its light; the neighbours rest. */
+.lp-carousel > li:not([data-active="true"]) .lp-glow::before { animation-play-state: paused; }
+
+/* ---------------------------------------------------------------------------------------------
+   Glowing ring: the same turning light as the assistant button in the corner (.agent-shell in styles.css), around
+   a card. The card sits inside with the ring's width as padding. The light is an oversized square with a conic
+   gradient, turned about its centre. Turning is a transform, so the browser does it on the GPU and never repaints
+   the card; the card sits above and leaves only the ring's width visible.
+   --------------------------------------------------------------------------------------------- */
+.lp-glow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 1.5px;
+  border-radius: 1rem;
+}
+.lp-glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300%;
+  aspect-ratio: 1;
+  z-index: -1;
+  background: conic-gradient(from 0deg, transparent 0deg, var(--lp-gold) 90deg, color-mix(in oklab, var(--lp-gold) 55%, transparent) 140deg, transparent 220deg, var(--lp-gold) 320deg, transparent 360deg);
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: lp-ring-turn 5s linear infinite;
+  will-change: transform;
+}
+@keyframes lp-ring-turn {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.lp-glow .lp-flip-face,
+.lp-glow > article {
+  border: 0;
+  border-radius: calc(1rem - 1.5px);
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Inner pages. They were written for the old gold theme; these rules map its classes onto the same
+   flat tokens as the landing, so every page shares one look (see AGENTS.md).
+   --------------------------------------------------------------------------------------------- */
+.lp .gold-card {
+  background: var(--lp-surface);
+  border: 1px solid var(--lp-line);
+  border-radius: 1rem;
+  box-shadow: none;
+  animation: none;
+}
+.lp .gold-card:hover { box-shadow: none; }
+.lp .gold-pill { background: none; animation: none; }
+.lp .gold-rule { height: 1px; background: var(--lp-line); }
+.lp .gold-sheen::after { display: none; }
+.lp .shadow-gold { box-shadow: none; }
+.lp .eyebrow {
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 500;
+  color: var(--lp-muted);
+}
+.lp .text-gold,
+.lp .text-gold-soft,
+.lp .hover\:text-gold:hover { color: var(--lp-fg); }
+.lp .text-gold-gradient {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--lp-fg);
+  animation: none;
+}
+.lp .bg-gold-gradient { background: var(--lp-fg); }
+.lp [class*="border-gold"] { border-color: var(--lp-line); }
+
+/* ---------------------------------------------------------------------------------------------
+   Offer card with a flip side (offer-card.tsx): front = what it is and what it costs, back = what is included.
+   --------------------------------------------------------------------------------------------- */
+.lp-flip { perspective: 1400px; }
+.lp-flip-inner {
+  display: grid;
+  height: 100%;
+  transition: transform 700ms var(--ease-lp);
+  transform-style: preserve-3d;
+}
+.lp-flip[data-flipped="true"] .lp-flip-inner { transform: rotateY(180deg); }
+.lp-flip-face {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.lp-flip-back { transform: rotateY(180deg); }
+
+/* ---------------------------------------------------------------------------------------------
+   Carousel, variant "slides" (the example pairs in the hero): one full width slide at a time, no scaling or frame.
+   --------------------------------------------------------------------------------------------- */
+.lp-carousel--slides {
+  --card-w: 100%;
+  padding: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.lp-carousel--slides > li { flex: 0 0 100%; }
+.lp-carousel--slides > li::after { display: none; }
+.lp[data-motion="on"] .lp-carousel--slides > li,
+.lp[data-motion="on"] .lp-carousel--slides > li[data-active="true"] {
+  transform: none;
+  opacity: 1;
+  cursor: auto;
+  z-index: auto;
+}

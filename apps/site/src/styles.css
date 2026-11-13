@@ -1,0 +1,176 @@
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@import "@fontsource-variable/manrope";
+@import "./landing.css";
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-status-live: var(--status-live);
+  --color-status-dev: var(--status-dev);
+  --color-status-custom: var(--status-custom);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.13 0.004 80);
+  --foreground: oklch(0.93 0.015 85);
+  --card: oklch(0.17 0.006 80);
+  --card-foreground: oklch(0.93 0.015 85);
+  --popover: oklch(0.17 0.006 80);
+  --popover-foreground: oklch(0.93 0.015 85);
+  --primary: oklch(0.78 0.12 82);
+  --primary-foreground: oklch(0.14 0.01 80);
+  --secondary: oklch(0.21 0.008 80);
+  --secondary-foreground: oklch(0.93 0.015 85);
+  --muted: oklch(0.2 0.006 80);
+  --muted-foreground: oklch(0.68 0.02 85);
+  --accent: oklch(0.24 0.02 82);
+  --accent-foreground: oklch(0.85 0.1 85);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.78 0.12 82 / 18%);
+  --input: oklch(0.78 0.12 82 / 25%);
+  --ring: oklch(0.78 0.12 82);
+  --gold: oklch(0.78 0.12 82);
+  --gold-soft: oklch(0.86 0.08 88);
+  --status-live: oklch(0.78 0.12 82);
+  --status-dev: oklch(0.7 0.03 85);
+  --status-custom: oklch(0.86 0.08 88);
+  --gradient-gold: linear-gradient(120deg, oklch(0.68 0.11 70), oklch(0.88 0.1 90) 50%, oklch(0.7 0.12 75));
+  --shadow-gold: 0 20px 50px -20px oklch(0.78 0.12 82 / 35%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: 0; }
+}
+
+:root.light {
+  --background: oklch(0.985 0.002 85);
+  --foreground: oklch(0.22 0.008 80);
+  --card: oklch(0.96 0.004 85);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.54 0.105 78);
+  --primary-foreground: oklch(0.985 0.002 85);
+  --secondary: oklch(0.93 0.005 85);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
+  --muted-foreground: oklch(0.45 0.015 80);
+  --accent: oklch(0.92 0.025 85);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.54 0.08 78 / 25%);
+  --input: oklch(0.54 0.08 78 / 40%);
+  --ring: var(--primary);
+  --gold: var(--primary);
+  --gold-soft: oklch(0.48 0.09 78);
+  --status-live: var(--gold);
+  --status-dev: oklch(0.45 0.025 85);
+  --status-custom: var(--gold-soft);
+  --gradient-gold: linear-gradient(120deg, oklch(0.48 0.09 70), oklch(0.59 0.11 85) 50%, oklch(0.5 0.1 75));
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+body, header, footer { transition: background-color 250ms ease, color 250ms ease; }
+.gold-sheen { position: relative; overflow: hidden; }
+.gold-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 25%, color-mix(in oklab, var(--gold-soft) 45%, transparent) 50%, transparent 75%);
+  transform: translateX(-120%);
+}
+.gold-sheen:hover::after { animation: gold-sweep 850ms ease; }
+@keyframes gold-sweep { to { transform: translateX(120%); } }
+@keyframes reveal-in { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+}
+@property --agent-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes agent-spin { to { --agent-angle: 360deg; } }
+.agent-shell { padding: 1.5px; border-radius: 1.5rem; background: conic-gradient(from var(--agent-angle), transparent 0deg, var(--gold) 90deg, var(--gold-soft) 140deg, transparent 220deg, var(--gold) 320deg, transparent 360deg); animation: agent-spin 5s linear infinite; box-shadow: var(--shadow-gold); }
+.agent-inner { border-radius: calc(1.5rem - 1.5px); }
+.agent-shell--pill, .agent-shell--pill .agent-inner { border-radius: 999px; }
+.agent-header { background: var(--gradient-gold); background-size: 200% auto; animation: shimmer-text 8s linear infinite; }
+.agent-header::after { content: ""; position: absolute; inset: auto 0 0 0; height: 24px; background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--card) 25%, transparent)); }
+@keyframes orb-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 50%, transparent); } 50% { box-shadow: 0 0 0 9px transparent; } }
+.agent-dot { animation: orb-pulse 2.6s ease-in-out infinite; }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(8px); } }
+.agent-bubble { animation: bubble-in 500ms ease-out 150ms both; }
+@keyframes shimmer-text { to { background-position: 200% center; } }
+.text-gold-gradient { background-size: 200% auto; animation: shimmer-text 6s linear infinite; }
+.nav-link { position: relative; }
+.nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: var(--color-gold); transform: scaleX(0); transition: transform 250ms ease; }
+.nav-link:hover::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@utility text-gold-gradient {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility bg-gold-gradient { background: var(--gradient-gold); }
+@utility shadow-gold { box-shadow: var(--shadow-gold); }
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+@utility gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+@keyframes gold-flow { to { background-position: 0 0, 300% 0; } }
+.gold-card { border: 1px solid transparent; background: linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(110deg, color-mix(in oklab, var(--gold) 25%, transparent), var(--gold), var(--gold-soft), color-mix(in oklab, var(--gold) 25%, transparent), var(--gold)) border-box; background-size: 100% 100%, 300% 100%; animation: gold-flow 8s linear infinite; transition: transform .3s, box-shadow .3s; }
+.gold-card:hover { box-shadow: var(--shadow-gold); }
+.gold-pill { background: linear-gradient(110deg, transparent 30%, color-mix(in oklab, var(--gold) 22%, transparent) 50%, transparent 70%); background-size: 250% 100%; animation: shimmer-text 4s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .gold-card, .gold-pill { animation: none; } }
+
+.flip-card { perspective: 1400px; }
+.flip-inner { position: relative; height: 100%; transition: transform .7s cubic-bezier(.2,.7,.2,1); transform-style: preserve-3d; }
+.flip-card[data-flipped="true"] .flip-inner { transform: rotateY(180deg); }
+.flip-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; } }

@@ -1,0 +1,24 @@
+{
+  "name": "oprynex-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "widget": "bun scripts/build-widget.ts",
+    "dev": "bun scripts/build-widget.ts && wrangler dev --port 8788",
+    "test": "bun scripts/build-widget.ts && vitest run",
+    "check": "bun scripts/build-widget.ts && tsc --noEmit",
+    "cf:deploy": "bun scripts/build-widget.ts && tsc --noEmit && vitest run && wrangler deploy",
+    "connect": "bun scripts/connect-engine.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260101.0",
+    "@types/node": "^22.16.5",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.154.0"
+  }
+}

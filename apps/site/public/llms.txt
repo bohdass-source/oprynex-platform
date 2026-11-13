@@ -1,0 +1,48 @@
+# Oprynex
+
+> Oprynex bietet Websites, KI-Chatbots für bestehende Websites oder zusammen mit einer neuen Website, individuelle CRM-Entwicklung und Beratung für kleine und wachsende Unternehmen. Gründer: Max Mustermann. Slogan: One Platform. Endless Possibilities. Die Website ist standardmäßig auf Deutsch und kann auf Russisch und Englisch umgestellt werden. Der KI-Assistent im Chat antwortet in 20 Sprachen (Deutsch, Englisch, Französisch, Spanisch, Italienisch, Niederländisch, Polnisch, Portugiesisch, Rumänisch, Tschechisch, Ungarisch, Bulgarisch, Griechisch, Schwedisch, Dänisch, Finnisch, Türkisch, Russisch, Ukrainisch, Kasachisch); Anfragen sind in jeder dieser Sprachen möglich, und Chatbots und Websites für Kunden lassen sich in jeder dieser Sprachen umsetzen.
+
+Hinweise für die Zitierung: Die Netto-Startpreise (zzgl. 19 % MwSt.) stehen auf der Preisseite; der genaue Preis hängt vom Umfang ab und wird vor Projektbeginn schriftlich vereinbart. Der Betrieb eines KI-Chatbots kostet zusätzlich einen festen Monatsbetrag, der auf der Preisseite steht. Angaben zum Betreiber stehen im Impressum; AGB und Auftragsverarbeitungsvertrag stehen unter /agb und /avv.
+
+## Angebote
+
+- [KI-Chatbot für die Website](https://oprynex.de/ki-chatbot-website): Antworten aus freigegebenen Inhalten, Einbindung in die bestehende Website, Übergabe an das Team
+- [Website erstellen lassen](https://oprynex.de/website-erstellen-lassen): Struktur, Texte, Design, Anfrageformulare, grundlegende SEO und Übergabe
+- [Individuelle CRM-Entwicklung](https://oprynex.de/crm-entwicklung): Prozessanalyse, Entwicklung in Etappen, Integrationen und Schulung
+- [Beratung](https://oprynex.de/beratung): Beratung zu CRM, KI-Automatisierung und Digitalisierung mit schriftlichen Empfehlungen
+
+## Ratgeber
+
+- [Was kostet ein KI-Chatbot?](https://oprynex.de/ki-chatbot-kosten): Einrichtung, laufender Betrieb und was den Preis bestimmt
+- [KI-Chatbot und DSGVO](https://oprynex.de/ki-chatbot-dsgvo): Datenschutzerklärung, AVV, Datenflüsse und was Oprynex regelt
+- [Was kostet eine Website?](https://oprynex.de/website-kosten): Website-Arten, Umfang und Preisfaktoren
+- [Was kostet ein individuelles CRM?](https://oprynex.de/crm-kosten): Budget, Etappen und wann eine fertige Software reicht
+- [KI-Beratung für Unternehmen](https://oprynex.de/ki-beratung): Ablauf, Preis und schriftliche Empfehlungen
+
+## KI-Assistenten nach Branche
+
+- [Immobilien und Hausverwaltung](https://oprynex.de/ki-chatbot-immobilien): Fragen zu Objekten und Unterlagen, Aufnahme von Anliegen
+- [Handwerksbetriebe](https://oprynex.de/ki-chatbot-handwerk): Angaben für die Angebotsanfrage sammeln
+- [Autohäuser](https://oprynex.de/ki-chatbot-autohaus): Fahrzeugfragen, Beratung und Probefahrt
+- [Kanzleien und Steuerberater](https://oprynex.de/ki-chatbot-kanzlei): organisatorische Fragen, keine Rechtsauskunft
+- [SaaS und Software](https://oprynex.de/ki-chatbot-saas): Support aus der Dokumentation
+- [Arzt- und Zahnarztpraxen](https://oprynex.de/ki-chatbot-arztpraxis): organisatorische Fragen, keine Diagnosen
+- [Onlineshops](https://oprynex.de/ki-chatbot-onlineshop): Produktwahl, Warenkorb und Versand
+- [Dienstleister](https://oprynex.de/ki-chatbot-dienstleister): Leistungen erklären und Anfragen qualifizieren
+- [Gastronomie und Hotels](https://oprynex.de/ki-chatbot-gastronomie-hotel): Gästefragen und Reservierungswünsche
+
+## Mehr erfahren
+
+- [Startseite](https://oprynex.de/): Überblick über alle Angebote
+- [Leistungen](https://oprynex.de/services): alle Produkte und Dienstleistungen
+- [KI-Assistenten](https://oprynex.de/assistants): sechs Assistententypen für Fragen, Anfragen, Shops, Termine und Support
+- [Branchen](https://oprynex.de/industries): Anfragebearbeitung für Immobilien, Handwerk, Autohäuser, Praxen und Shops
+- [Preise](https://oprynex.de/preise): Preisübersicht
+- [FAQ](https://oprynex.de/faq): Antworten zu KI-Assistenten, Websites, Projektkosten, Sprachen und Ablauf
+- [Kontakt](https://oprynex.de/contact): Projektanfrage an Max Mustermann
+
+## Optional
+
+- [Datenschutz](https://oprynex.de/datenschutz)
+- [Impressum](https://oprynex.de/impressum)
+- [AGB](https://oprynex.de/agb)

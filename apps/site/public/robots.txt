@@ -1,0 +1,44 @@
+# Oprynex – crawl rules. Public pages are open to search engines and AI assistants.
+# A bot with its own group ignores the "*" group, so the single Disallow is repeated per group.
+
+# Search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: Slurp
+Allow: /
+Disallow: /_serverFn/
+
+# AI search and answer engines (they cite the site in answers)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /_serverFn/
+
+# AI training crawlers (allowed, so assistants know the company)
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
+Disallow: /_serverFn/
+
+# Link previews
+User-agent: Twitterbot
+User-agent: facebookexternalhit
+User-agent: LinkedInBot
+Allow: /
+Disallow: /_serverFn/
+
+User-agent: *
+Allow: /
+Disallow: /_serverFn/
+
+Sitemap: https://oprynex.de/sitemap.xml

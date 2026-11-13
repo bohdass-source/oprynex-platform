@@ -1,0 +1,15 @@
+{
+  // Worker "bot" → https://bot.oprynex.workers.dev. Secrets (set by the owner, never committed):
+  // ANTHROPIC_API_KEY and BOT_ENGINE_TOKEN (bun run connect creates and stores the token).
+  "name": "bot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": {
+    // Public project values; the token is what lets the engine call the bot functions.
+    "SUPABASE_URL": "https://your-project-ref.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_your-key"
+  },
+  "observability": { "enabled": true }
+}

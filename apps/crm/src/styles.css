@@ -1,0 +1,47 @@
+@import "tailwindcss" source(none);
+@import "@fontsource-variable/manrope";
+@source "../src";
+
+/* Oprynex App tokens. Dark is the default (the server renders it); a light choice is set on <html data-theme="light"> after hydration.
+   Gold marks what is active or important: the current page, the main figure, focus. */
+:root {
+  --bg: #111116; --sidebar: #0b0b0f; --surface: #1a1a21; --surface-2: #24242d; --line: #2c2c36;
+  --text: #f3f3f1; --muted: #9d9daa; --gold: #dba812; --gold-soft: #2e2610; --on-gold: #141414;
+  --danger: #f97066; --ok: #4ade80; --chart-a: #7dd3c0; --chart-b: #dba812;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f4f4f2; --sidebar: #ffffff; --surface: #ffffff; --surface-2: #efefec; --line: #e2e2dd;
+  --text: #141414; --muted: #5c5c58; --gold: #b8860b; --gold-soft: #f6ecd0; --on-gold: #ffffff;
+  --danger: #b42318; --ok: #1f7a43; --chart-a: #2f9e8a; --chart-b: #b8860b;
+  color-scheme: light;
+}
+
+@theme inline {
+  --font-sans: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-sidebar: var(--sidebar);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-on-gold: var(--on-gold);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --color-chart-a: var(--chart-a);
+  --color-chart-b: var(--chart-b);
+}
+
+html, body { background: var(--bg); color: var(--text); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-gold text-on-gold hover:opacity-90; }
+@utility btn-ghost { @apply btn border border-line bg-surface text-text hover:bg-surface-2; }
+@utility field { @apply w-full rounded-lg border border-line bg-surface-2 px-3 py-2 text-sm text-text placeholder:text-muted; }
+@utility card { @apply rounded-2xl border border-line bg-surface; }
+@utility chip { @apply rounded-full border px-3 py-1 text-sm font-semibold; }
